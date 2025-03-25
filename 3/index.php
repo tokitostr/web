@@ -34,7 +34,7 @@ if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL
     $errors = true;
 }
 
-if (empty($_POST['dob']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $_POST['dob'])) {
+if (empty($_POST['dob']) || !DateTime::createFromFormat('Y-m-d', $_POST['dob'])) {
     echo '<p style="color: red;">Заполните корректно дату рождения (формат: YYYY-MM-DD).</p>';
     $errors = true;
 }
