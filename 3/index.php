@@ -72,7 +72,7 @@ $db = new PDO('mysql:host=localhost;dbname=u68764', $user, $pass, [
 ]);
 
 try {
-    $stmt = $db->prepare("INSERT INTO applications (full_name, phone, email, birth_date, gender, biography, contract_agreed) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $db->prepare("INSERT INTO applications (fio, phone, email, birth_date, gender, biography, contract_agreed) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $_POST['fio'],
         $_POST['phone'],
