@@ -1,52 +1,51 @@
-
+/* Основной фон страницы */
 body {
     font-family: Arial, sans-serif;
-    background-color: #2e2e2e; 
-    color: #e0e0e0;
+    background-color: #2e2e2e; /* Темный фон */
+    color: #e0e0e0; /* Светлый текст */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    margin-top: 80px;
-    margin-bottom: 80px;
 }
 
-
+/* Контейнер формы */
 .form-container {
-    background-color: #3c3c3c;
+    background-color: #3c3c3c; /* Темный фон формы */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 400px;
 }
 
-
+/* Элементы формы */
 .form-group {
     margin-bottom: 15px;
 }
 
-
+/* Множество тегов label */
 label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
-    color: #e0e0e0;
+    color: #e0e0e0; /* Светлый цвет текста */
 }
 
-
+/* Поля ввода */
 input,
 select,
 textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #555;
+    border: 1px solid #555; /* Темная рамка */
     border-radius: 5px;
-    background-color: #4a4a4a;
-    color: #e0e0e0; 
+    background-color: #4a4a4a; /* Темный фон полей */
+    color: #e0e0e0; /* Светлый текст */
 }
 
+/* Стили для радио-кнопок и чекбоксов */
 .radio-group,
 .checkbox-group {
     display: flex;
@@ -56,12 +55,12 @@ textarea {
 
 input[type="radio"],
 input[type="checkbox"] {
-    accent-color: #6c757d;
+    accent-color: #6c757d; /* Цвет для активных элементов */
 }
 
-
+/* Кнопка отправки */
 button {
-    background-color: #6c757d;
+    background-color: #6c757d; /* Темно-серый цвет кнопки */
     color: white;
     border: none;
     padding: 10px;
@@ -71,10 +70,12 @@ button {
     font-size: 16px;
 }
 
+/* Эффект при наведении на кнопку */
 button:hover {
-    background-color: #5a6268;
+    background-color: #5a6268; /* Более темный оттенок */
 }
 
+/* Стиль для текста ошибок */
 p {
     color: red;
     font-size: 14px;
