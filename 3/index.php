@@ -44,11 +44,6 @@ if (empty($_POST['languages']) || !is_array($_POST['languages'])) {
     $errors = true;
 }
 
-if (empty($_POST['bio']) || strlen($_POST['bio']) > 500) {
-    echo '<p style="color: red;">Заполните биографию (не более 500 символов).</p>';
-    $errors = true;
-}
-
 
 if ($errors) {
     exit();
