@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 $errors = false;
 
 
-if (empty($_POST['fio']) || !preg_match('/^[A-Za-zА-Яа-я\s]{1,150}$/u', $_POST['fio'])) {
+if (!preg_match('/^[A-Za-zА-Яа-я\s]{1,150}$/u', $_POST['fio'])) {
     echo '<p style="color: red;">Заполните корректно ФИО (только буквы и пробелы, не более 150 символов).</p>';
     $errors = true;
 }
