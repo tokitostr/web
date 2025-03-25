@@ -1,78 +1,69 @@
 <?php
-
-header('Content-Type: text/html; charset=UTF-8');
-
-$host = 'localhost';
-$username = 'u68764';
-$password = '1980249';
-
-
-$pdo = new PDO("mysql:host=$host;dbname=$username;charset=utf8", $username, $password, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-]);
-
-function validate_input($data) {
-    return htmlspecialchars(stripslashes(trim($data)));
-}
-
-$errors = [];
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fio = validate_input($_POST["fio"]);
-    $phone = validate_input($_POST["phone"]);
-    $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) ? $_POST["email"] : null;
-    $dob = $_POST["dob"];
-    $gender = $_POST["gender"];
-    $bio = validate_input($_POST["bio"]);
-    $contract = isset($_POST["contract"]) ? 1 : 0;
-    $languages = isset($_POST["language"]) ? (array)$_POST["language"] : [];
-
-    if (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]{1,150}$/u", $fio)) {
-        $errors[] = "ФИО может содержать только буквы и пробелы (до 150 символов)";
-    }
-    if (!$email) {
-        $errors[] = "Некорректный e-mail";
-    }
-    if (!in_array($gender, ["male", "female"])) {
-        $errors[] = "Некорректный пол";
-    }
-    if (empty($languages)) {
-        $errors[] = "Выберите хотя бы один язык программирования";
-    }
-
-    if (empty($errors)) {
-        try {
-            //запись информации
-            $stmt = $pdo->prepare("INSERT INTO applications (fio, phone, email, dob, gender, bio, contract) VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$fio, $phone, $email, $dob, $gender, $bio, $contract]);
-            $application_id = $pdo->lastInsertId();
-
-            //ID языков програм
-            $stmtLang = $pdo->prepare("SELECT id FROM languages WHERE name = ?");
-            $stmtInsert = $pdo->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (?, ?)");
-
-            foreach ($languages as $language) {
-                //ID языка в таблице languages
-                $stmtLang->execute([$language]);
-                $lang_id = $stmtLang->fetchColumn();
-
-                if ($lang_id) {
-                    // вставка связки application_id language_id
-                    $stmtInsert->execute([$application_id, $lang_id]);
-                } else {
-                    echo "<p style='color: red;'>Ошибка: Язык '$language' не найден в БД.</p>";
-                }
-            }
-
-            echo "<p style='color: green;'>Данные успешно сохранены!</p>";
-        } catch (PDOException $e) {
-            echo "<p style='color: red;'>Ошибка БД: " . $e->getMessage() . "</p>";
-        }
-    } else {
-        foreach ($errors as $error) {
-            echo "<p style='color: red;'>$error</p>";
-        }
-    }
-}
+echo '<link rel="stylesheet" href="styles.css">';
 ?>
 
+<main>
+    <div class="form-container">
+        <form method="post" action="index.php">
+            <div class="form-group">
+                <label for="fio">ФИО:</label>
+                <input type="text" id="fio" name="fio" required pattern="[A-Za-zА-Яа-я\s]{1,150}" maxlength="150">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Телефон:</label>
+                <input type="tel" id="phone" name="phone" required pattern="\+7\d{10}">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="dob">Дата рождения:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Пол:</label>
+                <div class="radio-group">
+                    <input type="radio" id="male" name="gender" value="male" required>
+                    <label for="male">Мужской</label>
+                    <input type="radio" id="female" name="gender" value="female" required>
+                    <label for="female">Женский</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="language">Любимый язык программирования:</label>
+                <select id="language" name="language[]" multiple required>
+                    <option value="1">Pascal</option>
+                    <option value="2">C</option>
+                    <option value="3">C++</option>
+                    <option value="4">JavaScript</option>
+                    <option value="5">PHP</option>
+                    <option value="6">Python</option>
+                    <option value="7">Java</option>
+                    <option value="8">Haskell</option>
+                    <option value="9">Clojure</option>
+                    <option value="10">Prolog</option>
+                    <option value="11">Scala</option>
+                    <option value="12">Go</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="bio">Биография:</label>
+                <textarea id="bio" name="biography" rows="4" required maxlength="500"></textarea>
+            </div>
+            
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="contract" name="contract_agreed" required>
+                <label for="contract">С контрактом ознакомлен(а)</label>
+            </div>
+            
+            <button type="submit">Сохранить</button>
+        </form>
+    </div>
+</main>
