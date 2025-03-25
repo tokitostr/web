@@ -34,11 +34,6 @@ if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL
     $errors = true;
 }
 
-if (empty($_POST['dob']) || !($dob = DateTime::createFromFormat('Y-m-d', trim($_POST['dob']))) || $dob->format('Y-m-d') !== trim($_POST['dob'])) {
-    echo '<p style="color: red;">Заполните корректно дату рождения (формат: YYYY-MM-DD).</p>';
-    $errors = true;
-}
-
 if (empty($_POST['gender']) || !in_array($_POST['gender'], ['male', 'female'])) {
     echo '<p style="color: red;">Выберите пол.</p>';
     $errors = true;
@@ -49,15 +44,11 @@ if (empty($_POST['languages']) || !is_array($_POST['languages'])) {
     $errors = true;
 }
 
-if (empty($_POST['biography']) || strlen($_POST['biography']) > 500) {
+if (empty($_POST['bio']) || strlen($_POST['bio']) > 500) {
     echo '<p style="color: red;">Заполните биографию (не более 500 символов).</p>';
     $errors = true;
 }
 
-if (empty($_POST['contract_agreed'])) {
-    echo '<p style="color: red;">Необходимо согласие с контрактом.</p>';
-    $errors = true;
-}
 
 if ($errors) {
     exit();
@@ -72,15 +63,14 @@ $db = new PDO('mysql:host=localhost;dbname=u68764', $user, $pass, [
 ]);
 
 try {
-    $stmt = $db->prepare("INSERT INTO applications (fio, phone, email, dob, gender, biography, contract_agreed) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $db->prepare("INSERT INTO applications (fio, phone, email, dob, gender, bio) VALUES (?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $_POST['fio'],
         $_POST['phone'],
         $_POST['email'],
         $_POST['dob'],
         $_POST['gender'],
-        $_POST['biography'],
-        $_POST['contract_agreed'] ? 1 : 0
+        $_POST['bio'],
     ]);
     $applications_id = $db->lastInsertId();
 
