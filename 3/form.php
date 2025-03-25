@@ -59,8 +59,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="biography">Биография:</label>
-                    <textarea id="biography" name="bio" rows="4" required maxlength="500"></textarea>
+                    <label for="bio">Биография:</label>
+                    <textarea id="bio" name="bio" rows="4" required maxlength="500"></textarea>
                 </div>
 
                 <div class="form-group checkbox-group">
