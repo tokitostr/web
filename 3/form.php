@@ -27,7 +27,7 @@
 
                 <div class="form-group">
                     <label for="birth_date">Дата рождения:</label>
-                    <input type="date" id="birth_date" name="birth_date" required>
+                    <input type="date" id="dob" name="dob" required>
                 </div>
 
                 <div class="form-group">
