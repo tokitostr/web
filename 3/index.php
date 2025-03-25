@@ -34,7 +34,7 @@ if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL
     $errors = true;
 }
 
-if (empty($_POST['birth_date']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $_POST['birth_date'])) {
+if (empty($_POST['dob']) || !preg_match('/^\d{4}-\d{2}-\d{2}$/', $_POST['dob'])) {
     echo '<p style="color: red;">Заполните корректно дату рождения (формат: YYYY-MM-DD).</p>';
     $errors = true;
 }
@@ -72,12 +72,12 @@ $db = new PDO('mysql:host=localhost;dbname=u68764', $user, $pass, [
 ]);
 
 try {
-    $stmt = $db->prepare("INSERT INTO applications (fio, phone, email, birth_date, gender, biography, contract_agreed) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $db->prepare("INSERT INTO applications (fio, phone, email, dob, gender, biography, contract_agreed) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([
         $_POST['fio'],
         $_POST['phone'],
         $_POST['email'],
-        $_POST['birth_date'],
+        $_POST['dob'],
         $_POST['gender'],
         $_POST['biography'],
         $_POST['contract_agreed'] ? 1 : 0
