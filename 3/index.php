@@ -5,12 +5,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     if (!empty($_GET['save'])) {
         print('Спасибо, результаты сохранены.');
     }
-
     include('form.php');
     exit();
 }
 
+
 $errors = FALSE;
+
 
 if (empty($_POST['fio']) || !preg_match('/^[A-Za-zА-Яа-я\s]{1,150}$/u', $_POST['fio'])) {
     print('Заполните корректно ФИО (только буквы и пробелы, не более 150 символов).<br/>');
@@ -52,10 +53,10 @@ if (empty($_POST['contract_agreed'])) {
     $errors = TRUE;
 }
 
-
 if ($errors) {
     exit();
 }
+
 
 $user = 'u68764';
 $pass = '1980249';
@@ -76,6 +77,7 @@ try {
         $_POST['contract_agreed'] ? 1 : 0
     ]);
     $application_id = $db->lastInsertId();
+
 
     foreach ($_POST['languages'] as $language_id) {
         $stmt = $db->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (?, ?)");
