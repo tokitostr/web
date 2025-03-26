@@ -1,63 +1,93 @@
+/* Общие стили для HTML и body */
 html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: url('background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #d0d0d0;
-}
-
-main {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
-    background: rgba(10, 25, 50, 0.9);
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-form {
+  }
+  
+  /* Стили для body */
+  body {
+    font-family: 'Times New Roman', Times, sans-serif; /* Шрифт с запасным вариантом */
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: #d16c00; /* Цвет текста */
+    background-color: #feb36e; /* Фоновый цвет страницы */
+  }
+  
+  /* Стили для основного контейнера */
+  main {
+    max-width: 960px; /* Максимальная ширина контейнера */
+    padding: 15px; /* Внутренние отступы */
+    padding-bottom: 30px; /* Отступ снизу */
+    margin: 0 auto; /* Центрирование контейнера */
+    background-color: #feb36e; /* Фоновый цвет контейнера */
+  }
+  
+  /* Стили для контейнера с классом .change */
+  main > .change {
     display: flex;
-    flex-direction: column;
-}
-
-label {
-    font-weight: bold;
-    margin-top: 10px;
-}
-
-input, select, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #555;
-    border-radius: 5px;
-    background: #1b2a4d;
-    color: #d0d0d0;
-}
-
-input[type="radio"], input[type="checkbox"] {
-    width: auto;
-    margin-right: 10px;
-}
-
-input[type="submit"] {
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 15px;
-}
-
-input[type="submit"]:hover {
-    background-color: #003d80;
-}
-
-@media screen and (max-width: 600px) {
-    main {
-        width: 90%;
+    flex-direction: column; /* Элементы в колонку */
+  }
+  
+  /* Стили для фона */
+  .background {
+    background-color: #feb36e; /* Фоновый цвет */
+  }
+  
+  /* Стили для формы */
+  #form {
+    flex: 1; /* Занимает доступное пространство */
+    order: 3; /* Порядок отображения */
+  }
+  
+  /* Медиа-запрос для экранов шире 800px */
+  @media screen and (min-width: 800px) {
+    main > .change {
+      flex-direction: column-reverse; /* Элементы в обратном порядке */
     }
-}
+  }
+  
+  /* Дополнительные стили для формы */
+  form {
+    max-width: 500px; /* Максимальная ширина формы */
+    margin: 0 auto; /* Центрирование формы */
+    padding: 15px; /* Внутренние отступы */
+    background-color: #facfb1; /* Фоновый цвет формы */
+    border-radius: 2px; /* Скругление углов */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень */
+  }
+  
+  label {
+    display: block; /* Каждая метка на новой строке */
+    margin-top: 8px; /* Отступ сверху */
+    font-weight: bold; /* Жирный шрифт */
+  }
+  
+  input, select, textarea {
+    width: 100%; /* Ширина на всю доступную ширину */
+    padding: 8px; /* Внутренние отступы */
+    margin-top: 5px; /* Отступ сверху */
+    margin-bottom: 10px; /* Отступ снизу */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 2px; /* Скругление углов */
+    font-family: 'Times New Roman', Times, sans-serif; /* Шрифт с запасным вариантом */
+  }
+  
+  input[type="radio"], input[type="checkbox"] {
+    width: auto; /* Автоматическая ширина */
+    margin-right: 10px; /* Отступ справа */
+  }
+  
+  input[type="submit"] {
+    background-color: #b04f04; /* Цвет фона */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем границу */
+    cursor: pointer; /* Курсор в виде указателя */
+    padding: 10px 20px; /* Внутренние отступы */
+    border-radius: 2px; /* Скругление углов */
+    font-size: 18px; /* Размер шрифта */
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #b04f04; /* Цвет фона при наведении */
+    font-size: 25px;
+  }
