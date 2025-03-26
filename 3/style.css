@@ -1,39 +1,34 @@
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #2e2e2e; 
-    color: #e0e0e0; 
+    background-color: #2e2e2e;
+    color: #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    margin-top: 80px;
-    margin-botton: 80px;
+    padding: 20px;
 }
 
-
 .form-container {
-    background-color: #3c3c3c; 
+    background-color: #3c3c3c;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 400px;
+    position: relative;
 }
-
 
 .form-group {
     margin-bottom: 15px;
 }
 
-
 label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
-    color: #e0e0e0; 
+    color: #e0e0e0;
 }
-
 
 input,
 select,
@@ -41,12 +36,11 @@ textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
-    border: 1px solid #555; 
+    border: 1px solid #555;
     border-radius: 5px;
     background-color: #4a4a4a;
-    color: #e0e0e0; 
+    color: #e0e0e0;
 }
-
 
 .radio-group,
 .checkbox-group {
@@ -57,12 +51,11 @@ textarea {
 
 input[type="radio"],
 input[type="checkbox"] {
-    accent-color: #6c757d; 
+    accent-color: #6c757d;
 }
 
-
 button {
-    background-color: #6c757d; 
+    background-color: #6c757d;
     color: white;
     border: none;
     padding: 10px;
@@ -72,13 +65,22 @@ button {
     font-size: 16px;
 }
 
-
 button:hover {
-    background-color: #5a6268; 
+    background-color: #5a6268;
 }
 
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: none;
+}
 
-p {
-    color: red;
-    font-size: 14px;
+.notification.error {
+    background-color: #dc3545;
 }
