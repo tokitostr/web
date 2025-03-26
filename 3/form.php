@@ -1,77 +1,52 @@
 <?php
- 
- header('Content-Type: text/html; charset=UTF-8');
- 
- $host = 'localhost';
- $username = 'u68764';
- $password = '1980249';
- 
- 
- $pdo = new PDO("mysql:host=$host;dbname=$username;charset=utf8", $username, $password, [
-     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
- ]);
- 
- function validate_input($data) {
-     return htmlspecialchars(stripslashes(trim($data)));
- }
- 
- $errors = [];
- 
- if ($_SERVER["REQUEST_METHOD"] == "POST") {
-     $fio = validate_input($_POST["fio"]);
-     $phone = validate_input($_POST["phone"]);
-     $email = filter_var($_POST["email"], FILTER_VALIDATE_EMAIL) ? $_POST["email"] : null;
-     $dob = $_POST["dob"];
-     $gender = $_POST["gender"];
-     $bio = validate_input($_POST["bio"]);
-     $contract = isset($_POST["contract"]) ? 1 : 0;
-     $languages = isset($_POST["language"]) ? (array)$_POST["language"] : [];
- 
-     if (!preg_match("/^[a-zA-Zа-яА-ЯёЁ\s]{1,150}$/u", $fio)) {
-         $errors[] = "ФИО может содержать только буквы и пробелы (до 150 символов)";
-     }
-     if (!$email) {
-         $errors[] = "Некорректный e-mail";
-     }
-     if (!in_array($gender, ["male", "female"])) {
-         $errors[] = "Некорректный пол";
-     }
-     if (empty($languages)) {
-         $errors[] = "Выберите хотя бы один язык программирования";
-     }
- 
-     if (empty($errors)) {
-         try {
-             //запись информации
-             $stmt = $pdo->prepare("INSERT INTO applications (fio, phone, email, dob, gender, bio, contract) VALUES (?, ?, ?, ?, ?, ?, ?)");
-             $stmt->execute([$fio, $phone, $email, $dob, $gender, $bio, $contract]);
-             $application_id = $pdo->lastInsertId();
- 
-             //ID языков програм
-             $stmtLang = $pdo->prepare("SELECT id FROM languages WHERE name = ?");
-             $stmtInsert = $pdo->prepare("INSERT INTO application_languages (application_id, language_id) VALUES (?, ?)");
- 
-             foreach ($languages as $language) {
-                 //ID языка в таблице languages
-                 $stmtLang->execute([$language]);
-                 $lang_id = $stmtLang->fetchColumn();
- 
-                 if ($lang_id) {
-                     // вставка связки application_id language_id
-                     $stmtInsert->execute([$application_id, $lang_id]);
-                 } else {
-                     echo "<p style='color: red;'>Ошибка: Язык '$language' не найден в БД.</p>";
-                 }
-             }
- 
-             echo "<p style='color: green;'>Данные успешно сохранены!</p>";
-         } catch (PDOException $e) {
-             echo "<p style='color: red;'>Ошибка БД: " . $e->getMessage() . "</p>";
-         }
-     } else {
-         foreach ($errors as $error) {
-             echo "<p style='color: red;'>$error</p>";
-         }
-     }
- }
- ?>
+echo '<link rel="stylesheet" href="style.css">';
+?>
+
+<main>
+  <div class="change">
+    <div id="form">
+      <form method="post" action="index.php">
+        <label>ФИО:</label>
+        <input type="text" name="fio" required pattern="[A-Za-zА-Яа-я\s]{1,150}" maxlength="150"><br>
+
+        <label>Телефон:</label>
+        <input type="tel" name="phone" required pattern="\+7\d{10}"><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
+
+        <label>Дата рождения:</label>
+        <input type="date" name="birth_date" required><br>
+
+        <label>Пол:</label>
+        <input type="radio" name="gender" value="male" required> Мужской
+        <input type="radio" name="gender" value="female"> Женский<br>
+
+        <label>Любимый язык программирования:</label>
+        <select name="languages[]" multiple required>
+          <option value="1">Pascal</option>
+          <option value="2">C</option>
+          <option value="3">C++</option>
+          <option value="4">JavaScript</option>
+          <option value="5">PHP</option>
+          <option value="6">Python</option>
+          <option value="7">Java</option>
+          <option value="8">Haskel</option>
+          <option value="9">Clojure</option>
+          <option value="10">Prolog</option>
+          <option value="11">Scala</option>
+          <option value="12">Go</option>
+        </select><br>
+
+        <label>Биография:</label>
+        <textarea name="biography" required maxlength="500"></textarea><br>
+
+        <label>
+          <input type="checkbox" name="contract_agreed" required> С контрактом ознакомлен(а)
+        </label><br>
+
+        <input type="submit" value="Сохранить">
+      </form>
+    </div>
+  </div>
+</main>
