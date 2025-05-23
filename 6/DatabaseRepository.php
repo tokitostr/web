@@ -9,8 +9,8 @@ class DatabaseRepository {
     private function getDBConnection() {
         static $db = null;
         if ($db === null) {
-            $user = 'u68596';
-            $pass = '2859691';
+            $user = 'u68764';
+            $pass = '1980249';
             $db = new PDO('mysql:host=localhost;dbname=u68596', $user, $pass, [
                 PDO::ATTR_PERSISTENT => true,
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
