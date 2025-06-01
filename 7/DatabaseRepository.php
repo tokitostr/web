@@ -54,7 +54,7 @@ class DatabaseRepository {
     }
     
     public function getAllLanguages() {
-        $stmt = $this->db->query("SELECT id, language_name FROM programming_languages");
+        $stmt = $this->db->query("SELECT id, language_name FROM languages");
         return $stmt->fetchAll();
     }
     
