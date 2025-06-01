@@ -1,0 +1,126 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    color: #d0d0d0;
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.admin-container {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 25px;
+    background: rgba(10, 25, 50, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    table-layout: auto;
+    background-color: rgba(27, 42, 77, 0.7);
+}
+
+table, th, td {
+    border: 1px solid #2a3a5a;
+}
+
+th, td {
+    padding: 10px 15px;
+    text-align: left;
+    word-wrap: break-word;
+    max-width: 200px;
+}
+
+th {
+    background-color: rgba(15, 30, 60, 0.9);
+    color: #ffffff;
+    position: sticky;
+    top: 0;
+    font-weight: 600;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(33, 48, 83, 0.5);
+}
+
+tr:hover {
+    background-color: rgba(50, 70, 110, 0.7);
+}
+
+.admin-container table button[type="submit"] {
+    padding: 8px 12px;
+    margin: 2px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.admin-container table button[type="submit"][name="edit"] {
+    background-color: #007bff;
+}
+
+.admin-container table button[type="submit"][name="edit"]:hover {
+    background-color: #0069d9;
+    transform: translateY(-1px);
+}
+
+.admin-container table button[type="submit"][name="delete"] {
+    background-color: #dc3545;
+}
+
+.admin-container table button[type="submit"][name="delete"]:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+.admin-container table form {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.admin-message {
+    padding: 12px;
+    margin: 15px 0;
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #d4edda;
+    border: 1px solid rgba(40, 167, 69, 0.4);
+    border-radius: 5px;
+}
+
+.admin-error {
+    padding: 12px;
+    margin: 15px 0;
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #f8d7da;
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    border-radius: 5px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .admin-container {
+        padding: 15px;
+    }
+    
+    th, td {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    
+    .admin-container table button[type="submit"] {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+}
