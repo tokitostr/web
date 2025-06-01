@@ -106,7 +106,7 @@ function renderSelectLanguages(array $selected = []): string {
     foreach ($languages as $lang) {
         $selectedAttr = in_array($lang['id'], $selected) ? 'selected' : '';
         $html .= '<option value="' . $lang['id'] . '" ' . $selectedAttr . '>' . 
-                 htmlspecialchars($lang['language_name']) . '</option>';
+                 htmlspecialchars($lang['name']) . '</option>';
     }
     return $html . '</select>';
 }
