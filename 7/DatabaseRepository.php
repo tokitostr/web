@@ -9,7 +9,7 @@ class DatabaseRepository {
     private function getDBConnection() {
         static $db = null;
         if ($db === null) {
-            $config = require __DIR__ . 'config.php';
+            $config = require __DIR__ . '/config.php';
             $db = new PDO(
                 "mysql:host={$config['db']['host']};dbname={$config['db']['dbname']}",
                 $config['db']['user'],
